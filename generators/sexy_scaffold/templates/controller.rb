@@ -2,31 +2,31 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   # GET /<%= controller_plural_name %>
   def index
-    @<%= name.downcase.pluralize %> = <%= name.capitalize %>.find(:all)
+    @<%= singular_name.pluralize %> = <%= name.capitalize %>.find(:all)
   end
 
   # GET /<%= controller_plural_name %>/1
   def show
-    @<%= name.downcase %> = <%= name.capitalize %>.find(params[:id])
+    @<%= singular_name %> = <%= name.capitalize %>.find(params[:id])
   end
 
   # GET /<%= controller_plural_name %>/new
   def new
-    @<%= name.downcase %> = <%= name.capitalize %>.new
+    @<%= singular_name %> = <%= name.capitalize %>.new
   end
 
   # GET /<%= controller_plural_name %>/1/edit
   def edit
-    @<%= name.downcase %> = <%= name.capitalize %>.find(params[:id])
+    @<%= singular_name %> = <%= name.capitalize %>.find(params[:id])
   end
 
   # POST /<%= controller_plural_name %>
   def create
-    @<%= name.downcase %> = <%= name.capitalize %>.new(params[:<%= name.downcase %>])
+    @<%= singular_name %> = <%= name.capitalize %>.new(params[:<%= singular_name %>])
 
-    if @<%= name.downcase %>.save
+    if @<%= singular_name %>.save
       flash[:notice] = '<%= name.capitalize %> was successfully created.'
-      redirect_to(@<%= name.downcase %>)
+      redirect_to(@<%= singular_name %>)
     else
       render :action => "new"
     end
@@ -34,11 +34,11 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # PUT /<%= controller_plural_name %>/1
   def update
-    @<%= name.downcase %> = <%= name.capitalize %>.find(params[:id])
+    @<%= singular_name %> = <%= name.capitalize %>.find(params[:id])
 
-    if @<%= name.downcase %>.update_attributes(params[:<%= singular_name %>])
+    if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
       flash[:notice] = '<%= name.capitalize %> was successfully updated.'
-      redirect_to(@<%= name.downcase %>)
+      redirect_to(@<%= singular_name %>)
     else
       render :action => "edit"
     end
@@ -48,6 +48,6 @@ class <%= controller_class_name %>Controller < ApplicationController
   def destroy
     <%= name.capitalize %>.find(params[:id]).destroy
 
-    redirect_to(<%= name.downcase.pluralize %>_url)
+    redirect_to(<%= singular_name.pluralize %>_url)
   end
 end
