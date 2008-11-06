@@ -26,7 +26,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     if @<%= singular_name %>.save
       flash[:notice] = '<%= name.capitalize %> was successfully created.'
-      redirect_to(@<%= singular_name %>)
+      redirect_to :back
     else
       render :action => "new"
     end

@@ -1,14 +1,6 @@
 %h1 New <%= singular_name %>
 
-.<%= singular_name %>_form
-  -form_for(<%= form_link_for(table_name, singular_name) %>) do |f|
-    = f.error_messages
-    
-<% for attribute in attributes -%>
-    .attribute
-      .name= f.label :<%= attribute.name %>
-      .value= f.<%= attribute.field_type %> :<%= attribute.name %> 
-<% end %>    
-    .<%= singular_name %>_submit_button= f.submit "Create"
+= render :partial => 'form', :locals => {:<%= singular_name %> => @<%= singular_name %> }
   
 = link_to 'Back', <%= path_for(table_name, singular_name, "index") %>
+
