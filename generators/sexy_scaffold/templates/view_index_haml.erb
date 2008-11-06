@@ -1,5 +1,4 @@
-%h1
-  Listing <%= plural_name %>
+%h1 Listing <%= plural_name %>
 
 %table
   %tr
@@ -9,9 +8,9 @@
 
   -for <%= singular_name %> in @<%= plural_name %>
     %tr
-  <% for attribute in attributes -%>
+<% for attribute in attributes -%>
       %td= h <%= singular_name %>.<%= attribute.name %>
-  <% end %>
+<% end %>
     
       %td= link_to 'Show', <%= path_for(table_name, singular_name, "show").gsub(/@/, "") %>
       %td= link_to 'Edit', <%= path_for(table_name, singular_name, "edit").gsub(/@/, "") %>
