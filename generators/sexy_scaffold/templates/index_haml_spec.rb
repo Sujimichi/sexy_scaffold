@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../../spec_helper'
 
 describe "/<%= name.pluralize %>/index.<%= default_file_extension %>" do
-  include <%= controller_class_name %>Helper
-  
   before do
 <% [98,99].each do |id| -%>
     <%= file_name %>_<%= id %> = mock_model(<%= singular_name.capitalize %>)

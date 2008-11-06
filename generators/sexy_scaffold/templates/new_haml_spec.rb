@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../../spec_helper'
 
 describe "/<%= name.pluralize %>/new.<%= default_file_extension %>" do
-  include <%= controller_class_name %>Helper
-  
   before do
     @<%= file_name %> = mock_model(<%= singular_name.capitalize %>)
     @<%= file_name %>.stub!(:new_record?).and_return(true)
