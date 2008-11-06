@@ -164,6 +164,7 @@ end
 describe <%= controller_class_name %>Controller, "handling POST /<%= name.pluralize %>" do
 
   before do
+    request.env["HTTP_REFERER"] = "/<%= name.pluralize %>/1"
     @<%= file_name %> = mock_model(<%= singular_name.capitalize %>, :to_param => "1")
     <%= singular_name.capitalize %>.stub!(:new).and_return(@<%= file_name %>)
   end
