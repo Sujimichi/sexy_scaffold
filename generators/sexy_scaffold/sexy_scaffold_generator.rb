@@ -83,8 +83,8 @@ class SexyScaffoldGenerator < Rails::Generator::NamedBase
           File.join('app/views', controller_class_path, controller_file_name, "#{action}.#{default_file_extension}")
         )
       end
-      m.template "sexy_scaffold:view__form_haml.erb", controller_class_path, controller_file_name, "_form.#{default_file_extension}"
-      #m.template "sexy_scaffold:view_list_haml.erb", controller_class_path, controller_file_name, "_form.#{default_file_extension}"
+      m.template "sexy_scaffold:view__form_haml.erb", 
+        File.join('app/views', controller_class_path, controller_file_name, "_form.#{default_file_extension}")
       
       # Model class, unit test.
       m.template 'sexy_scaffold:model.rb',      File.join('app/models', "#{@controller_singular_name.singularize}.rb")
