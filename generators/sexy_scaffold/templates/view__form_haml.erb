@@ -1,5 +1,5 @@
 .<%= singular_name %>_form
-  -form_for(<%= form_link_for(table_name, singular_name) %>) do |f|
+  -form_for <%= singular_name %> do |f|
     = f.error_messages
     
 <% for attribute in attributes -%>
