@@ -22,11 +22,11 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # POST /<%= controller_plural_name %>
   def create
-    @<%= controller_singular_name %> = <%= name.capitalize %>.new(params[:<%= controller_singular_name %>])
+    @<%= controller_singular_name %> = <%= name.capitalize %>.new(params[:<%= name %>])
 
     if @<%= controller_singular_name %>.save
       flash[:notice] = '<%= name.capitalize %> was successfully created.'
-      redirect_to(@<%= controller_singular_name %>)
+      redirect_to(@<%= name %>)
     else
       render :action => "new"
     end
@@ -36,7 +36,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     @<%= controller_singular_name %> = <%= name.capitalize %>.find(params[:id])
 
-    if @<%= controller_singular_name %>.update_attributes(params[:<%= controller_singular_name %>])
+    if @<%= controller_singular_name %>.update_attributes(params[:<%= name %>])
       flash[:notice] = '<%= name.capitalize %> was successfully updated.'
       redirect_to(@<%= controller_singular_name %>)
     else
