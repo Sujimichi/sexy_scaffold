@@ -10,7 +10,8 @@
   - page[:cancel_new_<%= singular_name %>_link].hide
   - page[:new_<%= singular_name %>_link].visual_effect :appear
 
-#create_<%= singular_name %>= render :partial => 'form', :locals => {:<%= singular_name %> => <%= singular_name.camelize %>.new }
+#create_<%= singular_name %>{:style => 'display:none;'}
+  = render :partial => 'form', :locals => {:<%= singular_name %> => <%= singular_name.camelize %>.new }
 
 %table{:width => "100%"}
   %tr
