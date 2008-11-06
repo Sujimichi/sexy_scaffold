@@ -59,32 +59,23 @@ class SexyScaffoldGenerator < Rails::Generator::NamedBase
       #p @controller_class_path # ["yoda"]
       
       # Check for class naming collisions.
-      m.class_collisions(controller_class_path, "#{controller_class_name}Controller", "#{controller_class_name}Helper")
+      m.class_collisions(controller_class_path, "#{controller_class_name}Controller")
       m.class_collisions(class_path, "#{class_name}")
 
-      # Controller, helper, views, and spec directories.
+      # Controller, views, and spec directories.
       m.directory(File.join('app/models'))
       m.directory(File.join('app/controllers', controller_class_path))
-      m.directory(File.join('app/helpers', controller_class_path))
       m.directory(File.join('app/views', controller_class_path, controller_file_name))
       m.directory(File.join('spec/controllers', controller_class_path))
       m.directory(File.join('spec/models'))
-      m.directory(File.join('spec/helpers', class_path))
-      m.directory File.join('spec/fixtures')
       m.directory File.join('spec/views', controller_class_path, controller_file_name)
       
-      # Controller spec, class, and helper.
+      # Controller spec, class.
       m.template 'sexy_scaffold:controller_spec.rb',
         File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
 
       m.template "sexy_scaffold:controller.rb",
         File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
-
-      m.template 'sexy_scaffold:helper_spec.rb',
-        File.join('spec/helpers', class_path, "#{controller_file_name}_helper_spec.rb")
-      
-      m.template "#{@resource_generator}:helper.rb",
-        File.join('app/helpers', controller_class_path, "#{controller_file_name}_helper.rb")
 
       for action in scaffold_views
         m.template(
@@ -93,9 +84,8 @@ class SexyScaffoldGenerator < Rails::Generator::NamedBase
         )
       end
       
-      # Model class, unit test, and fixtures.
+      # Model class, unit test.
       m.template 'sexy_scaffold:model.rb',      File.join('app/models', "#{@controller_singular_name.singularize}.rb")
-      m.template 'model:fixtures.yml',  File.join('spec/fixtures', "#{@controller_singular_name}.yml")
       m.template 'sexy_scaffold:model_spec.rb',       File.join('spec/models', "#{@controller_singular_name}_spec.rb")
 
       # View specs

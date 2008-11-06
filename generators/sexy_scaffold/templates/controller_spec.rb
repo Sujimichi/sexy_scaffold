@@ -60,35 +60,6 @@ describe <%= controller_class_name %>Controller, "handling GET /<%= name.plurali
   end
 end
 
-describe <%= controller_class_name %>Controller, "handling GET /<%= name.pluralize %>.xml" do
-
-  before do
-    @<%= file_name %> = mock_model(<%= singular_name.capitalize %>, :to_xml => "XML")
-    <%= singular_name.capitalize %>.stub!(:find).and_return(@<%= file_name %>)
-  end
-  
-  def do_get
-    @request.env["HTTP_ACCEPT"] = "application/xml"
-    get :index
-  end
-  
-  it "should be successful" do
-    do_get
-    response.should be_success
-  end
-
-  it "should find all <%= name.pluralize %>" do
-    <%= singular_name.capitalize %>.should_receive(:find).with(:all).and_return([@<%= file_name %>])
-    do_get
-  end
-  
-  it "should render the found <%= name %> as xml" do
-    @<%= file_name %>.should_receive(:to_xml).and_return("XML")
-    do_get
-    response.body.should == "XML"
-  end
-end
-
 describe <%= controller_class_name %>Controller, "handling GET /<%= name.pluralize %>/1" do
 
   before do
@@ -118,35 +89,6 @@ describe <%= controller_class_name %>Controller, "handling GET /<%= name.plurali
   it "should assign the found <%= file_name %> for the view" do
     do_get
     assigns[:<%= file_name %>].should equal(@<%= file_name %>)
-  end
-end
-
-describe <%= controller_class_name %>Controller, "handling GET /<%= name.pluralize %>/1.xml" do
-
-  before do
-    @<%= file_name %> = mock_model(<%= singular_name.capitalize %>, :to_xml => "XML")
-    <%= singular_name.capitalize %>.stub!(:find).and_return(@<%= file_name %>)
-  end
-  
-  def do_get
-    @request.env["HTTP_ACCEPT"] = "application/xml"
-    get :show, :id => "1"
-  end
-
-  it "should be successful" do
-    do_get
-    response.should be_success
-  end
-  
-  it "should find the <%= file_name %> requested" do
-    <%= singular_name.capitalize %>.should_receive(:find).with("1").and_return(@<%= file_name %>)
-    do_get
-  end
-  
-  it "should render the found <%= file_name %> as xml" do
-    @<%= singular_name %>.should_receive(:to_xml).and_return("XML")
-    do_get
-    response.body.should == "XML"
   end
 end
 
@@ -305,11 +247,6 @@ describe <%= controller_class_name %>Controller, "handling DELETE /<%= name %>/1
   
   def do_delete
     delete :destroy, :id => "1"
-  end
-
-  it "should find the <%= file_name %> requested" do
-    <%= singular_name.capitalize %>.should_receive(:find).with("1").and_return(@<%= file_name %>)
-    do_delete
   end
   
   it "should call destroy on the found <%= file_name %>" do

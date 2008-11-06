@@ -4,8 +4,6 @@ class <%= migration_name.classify.pluralize %> < ActiveRecord::Migration
 <% for attribute in attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
 <% end %>
-
-      t.timestamps 
     end
   end
 

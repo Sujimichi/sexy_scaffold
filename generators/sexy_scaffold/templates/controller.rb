@@ -2,7 +2,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   # GET /<%= controller_plural_name %>
   def index
-    @<%= singular_name.pluralize %> = <%= name.capitalize %>.find(:all)
+    @<%= controller_plural_name %> = <%= name.capitalize %>.find(:all)
   end
 
   # GET /<%= controller_plural_name %>/1
@@ -47,7 +47,6 @@ class <%= controller_class_name %>Controller < ApplicationController
   # DELETE /<%= controller_plural_name %>/1
   def destroy
     <%= name.capitalize %>.find(params[:id]).destroy
-
     redirect_to(<%= singular_name.pluralize %>_url)
   end
 end
