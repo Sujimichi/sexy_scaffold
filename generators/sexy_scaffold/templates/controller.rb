@@ -1,16 +1,54 @@
 class <%= controller_class_name %>Controller < ApplicationController
-  make_resourceful do
-    actions :all
-    <% if !controller_class_name.split("::")[1].nil? %>
-    belongs_to :<%= singular_name %>
-    <% end %>
-    response_for :show do |format|
-      format.html
-      format.xml { render :xml => @<%= singular_name %> }
+  
+  # GET /<%= controller_plural_name %>
+  def index
+    @<%= controller_plural_name %> = <%= controller_class_name_without_nesting %>.find(:all)
+  end
+
+  # GET /<%= controller_plural_name %>/1
+  def show
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.find(params[:id])
+  end
+
+  # GET /<%= controller_plural_name %>/new
+  def new
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.new
+  end
+
+  # GET /<%= controller_plural_name %>/1/edit
+  def edit
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.find(params[:id])
+  end
+
+  # POST /<%= controller_plural_name %>
+  def create
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.new(params[:<%= controller_singular_name %>])
+
+    if @<%= controller_singular_name %>.save
+      flash[:notice] = '<%= controller_class_name_without_nesting %> was successfully created.'
+      redirect_to(@<%= controller_singular_name %>)
+    else
+      render :action => "new"
     end
-    response_for :index do |format|
-      format.html
-      format.xml { render :xml => @<%= singular_name.pluralize %> }
+  end
+
+  # PUT /<%= controller_plural_name %>/1
+  def update
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.find(params[:id])
+
+    if @<%= controller_singular_name %>.update_attributes(params[:<%= controller_singular_name %>])
+      flash[:notice] = '<%= controller_class_name_without_nesting %> was successfully updated.'
+      redirect_to(@<%= controller_singular_name %>)
+    else
+      render :action => "edit"
     end
+  end
+
+  # DELETE /<%= controller_plural_name %>/1
+  def destroy
+    @<%= controller_singular_name %> = <%= controller_class_name_without_nesting %>.find(params[:id])
+    @<%= controller_singular_name %>.destroy
+
+    redirect_to(<%= controller_plural_name %>_url)
   end
 end
