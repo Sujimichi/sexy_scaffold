@@ -1,10 +1,14 @@
 Sexy Scaffold
 ============
 
+This fork by wolas does NOT:
+  - create fixtures 
+  - create helpers or helper specs.
+  - use make_resourceful
+  - create xml in controllers or specs
 
 better than rspec_haml_scaffold
-- support for model values upon generation, creates fixtuers as well
-- new dependancy for make_resourceful
+- support for model values upon generation
 
 better than make_resourcesful
 - creates scaffolded specs for controllers, models and views
