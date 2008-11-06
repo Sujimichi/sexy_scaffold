@@ -1,15 +1,14 @@
-%h1
-  New <%= singular_name %>
+%h1 New <%= singular_name %>
 
-= error_messages_for :<%= singular_name %> 
-
--form_for(<%= form_link_for(table_name, singular_name) %>) do |f| 
+.<%= singular_name %>_form
+  -form_for(<%= form_link_for(table_name, singular_name) %>) do |f|
+    = f.error_messages
+    
 <% for attribute in attributes -%>
-  %p
-    %b <%=attribute.column.human_name %>
-    %br
-    = f.<%= attribute.field_type %> :<%= attribute.name %> 
-<% end %>
-  %p
-    = f.submit "Create"
-= link_to 'Back', <%= path_for(table_name, singular_name, "index") %> 
+    .attribute
+      .name= f.label :<%= attribute.name %>
+      .value= f.<%= attribute.field_type %> :<%= attribute.name %> 
+<% end %>    
+    .<%= singular_name %>_submit_button= f.submit "Create"
+  
+= link_to 'Back', <%= path_for(table_name, singular_name, "index") %>

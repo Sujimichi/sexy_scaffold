@@ -1,6 +1,6 @@
 %h1 Listing <%= plural_name %>
 
-%table
+%table{:width => "100%"}
   %tr
 <% for attribute in attributes -%>
     %th <%=attribute.column.human_name%>

@@ -6,8 +6,7 @@
     
 <% for attribute in attributes -%>
     .attribute
-      .name
-        %label{:for => '<%= attribute.name %>'} <%= attribute.column.human_name %>
+      .name= f.label :<%= attribute.name %>
       .value= f.<%= attribute.field_type %> :<%= attribute.name %> 
 <% end %>    
     .<%= singular_name %>_submit_button= f.submit "Update"
