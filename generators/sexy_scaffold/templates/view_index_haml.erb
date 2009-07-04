@@ -1,30 +1,43 @@
 %h1 Listing <%= plural_name %>
 
-= link_to_function 'New <%= singular_name %>', :href => new_<%= singular_name %>_path, :id => 'new_<%= singular_name %>_link' do |page|
-  - page[:create_<%= singular_name %>].visual_effect :blind_down, :duration => 0.5
-  - page[:new_<%= singular_name %>_link].hide
-  - page[:cancel_new_<%= singular_name %>_link].visual_effect :appear
+.left
+  .widget
+    = link_to_function 'New <%= singular_name %>', "toggeler('new_<%= singular_name %>_link', 'none', 'create_<%= singular_name %>', 'New <%= singular_name %>', 'Cancel')", :href => new_<%= singular_name %>_path, :id => 'new_<%= singular_name %>_link'
+    #create_<%= singular_name %>.hidden
+      = render :partial => 'form', :locals => {:<%= singular_name %> => <%= singular_name.camelize %>.new }
 
-= link_to_function 'Cancel', :href => new_<%= singular_name %>_path, :id => 'cancel_new_<%= singular_name %>_link', :style => "display:none;" do |page|
-  - page[:create_<%= singular_name %>].visual_effect :blind_up, :duration => 0.5
-  - page[:cancel_new_<%= singular_name %>_link].hide
-  - page[:new_<%= singular_name %>_link].visual_effect :appear
+.clear
 
-#create_<%= singular_name %>{:style => 'display:none;'}
-  = render :partial => 'form', :locals => {:<%= singular_name %> => <%= singular_name.camelize %>.new }
 
-%table{:width => "100%"}
-  %tr
-<% for attribute in attributes -%>
-    %th <%=attribute.column.human_name%>
-<% end -%>
-
-  -for <%= singular_name %> in @<%= plural_name %>
+.widget
+  %table{:width => "100%"}
     %tr
 <% for attribute in attributes -%>
-      %td= h <%= singular_name %>.<%= attribute.name %>
+      %th <%=attribute.column.human_name%>
+<% end -%>
+
+    -for <%= singular_name %> in @<%= plural_name %>
+      %tr
+<% for attribute in attributes -%>
+        %td= h <%= singular_name %>.<%= attribute.name %>
 <% end %>
-    
-      %td= link_to 'Show', <%= path_for(table_name, singular_name, "show").gsub(/@/, "") %>
-      %td= link_to 'Edit', <%= path_for(table_name, singular_name, "edit").gsub(/@/, "") %>
-      %td= link_to 'Destroy', <%= path_for(table_name, singular_name, "destroy").gsub(/@/, "") %>
+
+        %td= link_to 'Show', <%= path_for(table_name, singular_name, "show").gsub(/@/, "") %>
+        %td= link_to 'Edit', <%= path_for(table_name, singular_name, "edit").gsub(/@/, "") %>
+        %td= link_to 'Destroy', <%= path_for(table_name, singular_name, "destroy").gsub(/@/, "") %>
+
+
+/put this js in your layout if not already there
+:javascript
+  function toggeler(link_div, state_1_div, state_2_div, state_1_text, state_2_text){
+    var opt = $('#' + link_div).html();
+    if (opt == state_1_text){
+      $('#' + state_1_div).hide('slow');
+      $('#' + state_2_div).show('slow');
+      $('#' + link_div).html(state_2_text);
+    }else{
+      $('#' + state_2_div).hide('slow');
+      $('#' + state_1_div).show('slow');
+      $('#' + link_div).html(state_1_text);
+    };
+  };
