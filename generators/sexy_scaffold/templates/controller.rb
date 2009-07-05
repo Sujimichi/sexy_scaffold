@@ -13,7 +13,6 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_name %> = <%= name.capitalize %>.new
   end
 
-
   def edit
   end
 
@@ -23,7 +22,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     if @<%= singular_name %>.save
       flash[:notice] = '<%= name.capitalize %> was successfully created.'
-      redirect_to :back
+      redirect_to(@<%= singular_name %>
     else
       render :action => "new"
     end
@@ -48,6 +47,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   def assign_<%= singular_name %>
     begin
+      #To confine the user to view only <%= singular_name.pluralize %> associated with them use the commented line instead, here and index and create.  Assumes authlogic and current_user method in application_controller
       #@<%= singular_name %> = current_user.<%= controller_plural_name %>.find(params[:id])
       @<%= singular_name %> = <%= name.capitalize %>.find(params[:id])
     rescue
